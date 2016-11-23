@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="currencies">
+        <item name="AUD" />
+        <item name="BGN" />
+        <item name="BRL" />
+        <item name="CAD" />
+        <item name="CHF" />
+        <item name="CNY" />
+        <item name="CZK" />
+        <item name="DKK" />
+        <item name="GBP" />
+        <item name="HKD" />
+        <item name="HRK" />
+        <item name="HUF" />
+        <item name="IDR" />
+        <item name="ILS" />
+        <item name="INR" />
+        <item name="JPY" />
+        <item name="KRW" />
+        <item name="MXN" />
+        <item name="MYR" />
+        <item name="NOK" />
+        <item name="NZD" />
+        <item name="PHP" />
+        <item name="PLN" />
+        <item name="RON" />
+        <item name="RUB" />
+        <item name="SEK" />
+        <item name="SGD" />
+        <item name="THB" />
+        <item name="TRY" />
+        <item name="ZAR" />
+        <item name="EUR" />
+    </string-array>
+</resources>

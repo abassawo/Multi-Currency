@@ -1,9 +1,12 @@
 package com.abasscodes.myapplication;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +18,20 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
 
     private final List<Fragment> fragments = new ArrayList<>();
     private final List<String> fragmentTitles = new ArrayList<>();
+    private Callback callback;
 
 
-    public TabAdapter(FragmentManager fm) {
+    public TabAdapter(AppCompatActivity activity){
+        super(activity.getSupportFragmentManager());
+        try{
+            this.callback = (Callback) activity;
+        }catch (ClassCastException cce){
+            throw new ClassCastException("Activity must implement TabAdapter.Callback");
+        }
+        callback.onTabFocus(0);
+    }
+
+    private TabAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -43,12 +57,12 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        callback.onTabFocus(position);
     }
 
     @Override
     public void onPageSelected(int position) {
-
+        callback.onTabFocus(position);
     }
 
     @Override
@@ -60,5 +74,9 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
+    }
+
+    public interface Callback{
+        void onTabFocus(int position);
     }
 }

@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.abasscodes.myapplication.model.Currencies;
 import com.abasscodes.myapplication.model.api.ApiClient;
 import com.abasscodes.myapplication.model.api.Rates;
 
@@ -22,32 +24,40 @@ import butterknife.ButterKnife;
  * Created by C4Q on 11/18/16.
  */
 
-public class CurrencyListFragment extends Fragment implements ApiClient.Listener {
-    private static final String TAG = CurrencyListFragment.class.getSimpleName();
+public class RatesListFragment extends Fragment implements ApiClient.Listener {
+    private static final String TAG = RatesListFragment.class.getSimpleName();
     @BindView(R.id.recycler_view)
     RecyclerView rv;
     private RatesAdapter adapter;
 
-    private static CurrencyListFragment instance;
+    private static RatesListFragment instance;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        setRetainInstance(true);
         ApiClient.getInstance(this).getConversionMap();
         adapter = new RatesAdapter();
 
     }
 
-    public static CurrencyListFragment getInstance() {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_rates, menu);
+    }
+
+    public static RatesListFragment getInstance() {
         if (instance == null) {
             instance = newInstance();
         }
         return instance;
     }
 
-    private static CurrencyListFragment newInstance() {
+    private static RatesListFragment newInstance() {
         Bundle args = new Bundle();
-        CurrencyListFragment fragment = new CurrencyListFragment();
+        RatesListFragment fragment = new RatesListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,5 +84,7 @@ public class CurrencyListFragment extends Fragment implements ApiClient.Listener
     @Override
     public void onConversionComplete(Rates rates) {
         setupRV(rates);
+        MainActivity activity = (MainActivity) getActivity();
+        activity.onRatesLoaded(rates);
     }
 }

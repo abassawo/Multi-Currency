@@ -1,5 +1,8 @@
 package com.abasscodes.myapplication.model.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by C4Q on 11/18/16.
  */
 
-public class Rates {
+public class Rates implements Parcelable{
 
     @SerializedName("AUD")
     @Expose
@@ -102,6 +105,21 @@ public class Rates {
     @SerializedName("EUR")
     @Expose
     private Double eUR;
+
+    protected Rates(Parcel in) {
+    }
+
+    public static final Creator<Rates> CREATOR = new Creator<Rates>() {
+        @Override
+        public Rates createFromParcel(Parcel in) {
+            return new Rates(in);
+        }
+
+        @Override
+        public Rates[] newArray(int size) {
+            return new Rates[size];
+        }
+    };
 
     /**
      * @return The aUD
@@ -537,4 +555,41 @@ public class Rates {
         this.eUR = eUR;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeDouble(aUD);
+        parcel.writeDouble(bGN);
+        parcel.writeDouble(bRL);
+        parcel.writeDouble(cAD);
+        parcel.writeDouble(cHF);
+        parcel.writeDouble(cNY);
+        parcel.writeDouble(cZK);
+        parcel.writeDouble(dKK);
+        parcel.writeDouble(gBP);
+        parcel.writeDouble(hKD);
+        parcel.writeDouble(hRK);
+        parcel.writeDouble(hUF);
+        parcel.writeDouble(iDR);
+        parcel.writeDouble(iLS);
+        parcel.writeDouble(iNR);
+        parcel.writeDouble(jPY);
+        parcel.writeDouble(kRW);
+        parcel.writeDouble(mXN);
+        parcel.writeDouble(nOK);
+        parcel.writeDouble(nZD);
+        parcel.writeDouble(pHP);
+        parcel.writeDouble(pLN);
+        parcel.writeDouble(rON);
+        parcel.writeDouble(rUB);
+        parcel.writeDouble(sEK);
+        parcel.writeDouble(tHB);
+        parcel.writeDouble(tRY);
+        parcel.writeDouble(zAR);
+        parcel.writeDouble(eUR);
+    }
 }
