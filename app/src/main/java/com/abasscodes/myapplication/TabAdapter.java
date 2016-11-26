@@ -18,17 +18,11 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
 
     private final List<Fragment> fragments = new ArrayList<>();
     private final List<String> fragmentTitles = new ArrayList<>();
-    private Callback callback;
+
 
 
     public TabAdapter(AppCompatActivity activity){
         super(activity.getSupportFragmentManager());
-        try{
-            this.callback = (Callback) activity;
-        }catch (ClassCastException cce){
-            throw new ClassCastException("Activity must implement TabAdapter.Callback");
-        }
-        callback.onTabFocus(0);
     }
 
     private TabAdapter(FragmentManager fm) {
@@ -57,12 +51,12 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        callback.onTabFocus(position);
+
     }
 
     @Override
     public void onPageSelected(int position) {
-        callback.onTabFocus(position);
+
     }
 
     @Override
@@ -76,7 +70,4 @@ public class TabAdapter extends FragmentPagerAdapter implements ViewPager.OnPage
         return fragments.get(position);
     }
 
-    public interface Callback{
-        void onTabFocus(int position);
-    }
 }

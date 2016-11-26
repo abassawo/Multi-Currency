@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
@@ -20,9 +21,8 @@ import com.abasscodes.myapplication.model.api.Rates;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-;import static com.abasscodes.myapplication.R.id.spinner;
 
-public class MainActivity extends AppCompatActivity implements TabAdapter.Callback{
+public class MainActivity extends AppCompatActivity implements BaseFragment.FragmentCallback{
 
     private TabAdapter adapter;
     @BindView(R.id.tabs)
@@ -33,12 +33,6 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Callba
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.toolbar_title)
-    TextView toolbarTitle;
-    @BindView(R.id.spinner_toolbar)
-    Spinner spinner;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,32 +71,32 @@ public class MainActivity extends AppCompatActivity implements TabAdapter.Callba
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayShowTitleEnabled(false);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     public void initViewPager(ViewPager viewPager) {
         adapter.addFragment(new RatesListFragment(), "Rates");
-//        adapter.addFragment(new CalculatorFragment(), "Calculate");
         viewPager.setAdapter(adapter);
     }
 
-    public void onRatesLoaded(Rates rates){
+    public void onRatesLoaded(Rates rates) {
         adapter.addFragment(CalculatorFragment.newInstance(rates), "Calculate");
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onTabFocus(int position) {
-        switch (position){
-            case 0: toolbarTitle.setVisibility(View.VISIBLE);
-                spinner.setVisibility(View.INVISIBLE);
-                toolbarTitle.setVisibility(View.VISIBLE);
-                break;
-            case 1:toolbarTitle.setVisibility(View.INVISIBLE);
-                spinner.setVisibility(View.VISIBLE);
-                toolbarTitle.setVisibility(View.INVISIBLE);
-        }
+    public void reload(int tabIdx) {
+        BaseFragment fragment = (BaseFragment) adapter.getItem(tabIdx);
+        fragment.reload();
     }
 }
