@@ -7,6 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+<<<<<<< HEAD
+=======
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+>>>>>>> parent of 9241cdb... set up currency spinner
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +49,14 @@ public class RatesListFragment extends Fragment implements ApiClient.Listener {
         ApiClient.getInstance(this).getConversionMap();
         adapter = new RatesAdapter(PreferenceHelper.getDefaultCurrencies());
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_rates, menu);
+    }
+>>>>>>> parent of 9241cdb... set up currency spinner
 
     public static RatesListFragment getInstance() {
         if (instance == null) {

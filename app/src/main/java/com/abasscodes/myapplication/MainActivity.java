@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.abasscodes.myapplication.model.FixerDictionary;
@@ -21,8 +20,9 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+;import static com.abasscodes.myapplication.R.id.spinner;
 
-public class MainActivity extends AppCompatActivity implements BaseFragment.FragmentCallback{
+public class MainActivity extends AppCompatActivity implements TabAdapter.Callback{
 
     private TabAdapter adapter;
     @BindView(R.id.tabs)
@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.spinner_toolbar)
+    Spinner spinner;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,35 +77,39 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setDisplayShowTitleEnabled(false);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     public void initViewPager(ViewPager viewPager) {
         adapter.addFragment(new RatesListFragment(), "Rates");
+//        adapter.addFragment(new CalculatorFragment(), "Calculate");
         viewPager.setAdapter(adapter);
     }
 
+<<<<<<< HEAD
     public void onRatesLoaded(Rates rates) {
         FixerDictionary dictionary = new FixerDictionary(rates);
 //        Set<String> currencies = PreferenceHelper.getFollowedCurrencies(this);
+=======
+    public void onRatesLoaded(Rates rates){
+>>>>>>> parent of 9241cdb... set up currency spinner
         adapter.addFragment(CalculatorFragment.newInstance(rates), "Calculate");
         adapter.notifyDataSetChanged();
     }
 
 
     @Override
-    public void reload(int tabIdx) {
-        BaseFragment fragment = (BaseFragment) adapter.getItem(tabIdx);
-        fragment.reload();
+    public void onTabFocus(int position) {
+        switch (position){
+            case 0: toolbarTitle.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.INVISIBLE);
+                toolbarTitle.setVisibility(View.VISIBLE);
+                break;
+            case 1:toolbarTitle.setVisibility(View.INVISIBLE);
+                spinner.setVisibility(View.VISIBLE);
+                toolbarTitle.setVisibility(View.INVISIBLE);
+        }
     }
 }

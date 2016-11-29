@@ -29,8 +29,6 @@ import com.abasscodes.myapplication.model.FixerDictionary;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 import com.abasscodes.myapplication.model.api.Rates;
 
-import java.util.Arrays;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,8 +40,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     EditText baseField;
     @BindView(R.id.result_textview)
     TextView resultField;
-    @BindView(R.id.convert_btn)Button convertBtn;
-    @BindView(R.id.spinner_toolbar)
     Spinner spinner;
 
     private RateCalculator calculator;
@@ -63,24 +59,23 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         Bundle args = getArguments();
         Rates rates = (Rates) args.get("RATES");
         calculator = new RateCalculator(rates);
         targetCurrency = currencies[0];
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.menu_calculate, menu);
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_calculate, menu);
+    }
 
     public void initListeners() {
-        convertBtn.setOnClickListener(this);
+
     }
 
     public void updateAnswer(double result) {
-
         resultField.setText(String.valueOf(result));
     }
 
@@ -90,15 +85,15 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_calculator, container, false);
         ButterKnife.bind(this, view);
+        spinner = (Spinner) getActivity().findViewById(R.id.spinner_toolbar);
         spinner.setClickable(true);
-        Arrays.sort(currencies);
+        spinner.setVisibility(View.VISIBLE);
         spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, currencies));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 targetCurrency = currencies[i];
-                if(!TextUtil.isEmpty(baseField))
-                updateAnswer(calculator.convertTo(targetCurrency, Double.parseDouble(baseField.getText().toString())));
+                updateAnswer(calculator.getConversionFromCurrentBase(targetCurrency));
             }
 
             @Override

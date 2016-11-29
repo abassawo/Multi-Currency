@@ -6,7 +6,6 @@
 
     <item android:id="@+id/reload"
         android:title="@string/reload"
-        android:icon="@drawable/autorenew"
         app:showAsAction="always"/>
 
 

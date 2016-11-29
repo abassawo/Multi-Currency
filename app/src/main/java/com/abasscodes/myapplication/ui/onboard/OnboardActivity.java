@@ -60,13 +60,20 @@ public class OnboardActivity extends MaterialIntroActivity {
     public void initSlides() {
         enableLastSlideAlphaExitTransition(true);
         getNextButtonTranslationWrapper().setExitTranslation(translation);
+<<<<<<< HEAD
         addSlide(new PickerFragment());
         addLastSlide();
+=======
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            addPermissionSlide();
+        }
+>>>>>>> parent of 9241cdb... set up currency spinner
     }
 
     public void addLastSlide() {
-        addSlide(builder.backgroundColor(R.color.cardview_dark_background)
-                .buttonsColor(R.color.blueish_grey)
+        addSlide(builder.backgroundColor(R.color.colorPrimary)
+                .buttonsColor(R.color.colorAccent)
                 .image(agency.tango.materialintroscreen.R.drawable.ic_next)
                 .title("You're all set.")
                 .description("Start using Multi-CUrrency")
@@ -78,8 +85,8 @@ public class OnboardActivity extends MaterialIntroActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void addPermissionSlide() {
         SlideFragment permissionSlide = builder
-                .backgroundColor(R.color.blueish_grey)
-                .buttonsColor(R.color.cardview_shadow_end_color)
+                .backgroundColor(R.color.colorPrimary)
+                .buttonsColor(R.color.colorAccent)
                 .neededPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
                 .image(agency.tango.materialintroscreen.R.drawable.ic_next)
                 .title("Grant Permissions")
