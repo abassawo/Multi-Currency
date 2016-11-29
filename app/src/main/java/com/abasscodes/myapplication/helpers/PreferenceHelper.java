@@ -3,6 +3,7 @@ package com.abasscodes.myapplication.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,10 +38,15 @@ public class PreferenceHelper {
 
     public static void setShowAllCurrencies(Context context, boolean showAll) {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
-                .putBoolean(show_all_currs, showAll);
+                .putBoolean(show_all_currs, showAll).commit();
     }
 
     public static boolean showAllCurrenciesOrNot(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(show_all_currs, false);
+    }
+
+    public static void toggleShowAll(Context context) {
+        boolean showAll = showAllCurrenciesOrNot(context);
+        setShowAllCurrencies(context, !showAll);
     }
 }
