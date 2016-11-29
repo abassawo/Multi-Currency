@@ -45,19 +45,15 @@ public class Rates implements Parcelable{
     @SerializedName("HRK")
     @Expose
     private Double hRK;
-
     @SerializedName("HUF")
     @Expose
     private Double hUF;
-
     @SerializedName("IDR")
     @Expose
-    private Double iDR;
-
+    private Integer iDR;
     @SerializedName("ILS")
     @Expose
     private Double iLS;
-
     @SerializedName("INR")
     @Expose
     private Double iNR;
@@ -296,14 +292,14 @@ public class Rates implements Parcelable{
     /**
      * @return The iDR
      */
-    public Double getIDR() {
+    public Integer getIDR() {
         return iDR;
     }
 
     /**
      * @param iDR The IDR
      */
-    public void setIDR(Double iDR) {
+    public void setIDR(Integer iDR) {
         this.iDR = iDR;
     }
 

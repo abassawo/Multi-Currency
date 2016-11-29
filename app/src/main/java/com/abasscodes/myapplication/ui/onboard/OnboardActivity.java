@@ -30,6 +30,7 @@ public class OnboardActivity extends MaterialIntroActivity {
     private IViewTranslation translation;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +48,12 @@ public class OnboardActivity extends MaterialIntroActivity {
             }
         }, getResources().getString(R.string.app_name));
         addSlide(new SlideFragmentBuilder()
-                .backgroundColor(R.color.colorPrimary)
-                .buttonsColor(R.color.colorAccent)
-                .image(agency.tango.materialintroscreen.R.drawable.ic_next)
-                .title("Let's get started!")
-                .description(getResources().getString(R.string.fixer_credit))
-                .build(), buttonBehavior);
+                        .backgroundColor(R.color.colorPrimary)
+                        .buttonsColor(R.color.colorAccent)
+                        .image(agency.tango.materialintroscreen.R.drawable.ic_next)
+                        .title("Let's get started!")
+                        .description(getResources().getString(R.string.fixer_credit))
+                        .build(), buttonBehavior);
         initSlides();
 
     }
@@ -60,15 +61,12 @@ public class OnboardActivity extends MaterialIntroActivity {
     public void initSlides() {
         enableLastSlideAlphaExitTransition(true);
         getNextButtonTranslationWrapper().setExitTranslation(translation);
-<<<<<<< HEAD
         addSlide(new PickerFragment());
         addLastSlide();
-=======
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             addPermissionSlide();
         }
->>>>>>> parent of 9241cdb... set up currency spinner
     }
 
     public void addLastSlide() {

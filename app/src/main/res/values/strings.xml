@@ -7,4 +7,9 @@
     <string name="app_description">Convert all the currencies!</string>
     <string name="start">Start</string>
     <string name="fixer_credit">Conversion rates from Fixer.io</string>
+    <string name="text_on">On</string>
+    <string name="text_off">Off</string>
+    <string name="select_all">Select all</string>
+    <string name="clear_extras">Clear</string>
+    <string name="error_message">Error</string>
 </resources>
