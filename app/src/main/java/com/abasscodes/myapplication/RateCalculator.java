@@ -1,6 +1,5 @@
 package com.abasscodes.myapplication;
 
-import com.abasscodes.myapplication.model.Currencies;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 import com.abasscodes.myapplication.model.api.Rates;
 

@@ -3,14 +3,11 @@ package com.abasscodes.myapplication.model.api;
 import android.util.Log;
 
 import com.abasscodes.myapplication.Config;
-import com.abasscodes.myapplication.model.Currencies;
-import com.abasscodes.myapplication.model.Currency;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +49,6 @@ public class ApiClient {
     }
 
     public void getConversionMap(){
-        final Currencies currencies = new Currencies();
         getLatest(Config.baseCurrency).enqueue(new Callback<RateResponse>() {
             @Override
             public void onResponse(Call<RateResponse> call, Response<RateResponse> response) {

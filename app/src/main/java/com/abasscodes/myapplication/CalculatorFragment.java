@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.abasscodes.myapplication.helpers.TextUtil;
+import com.abasscodes.myapplication.model.FixerDictionary;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 import com.abasscodes.myapplication.model.api.Rates;
 
@@ -56,7 +57,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         fragment.setArguments(args);
         return fragment;
     }
-
 
 
     @Override

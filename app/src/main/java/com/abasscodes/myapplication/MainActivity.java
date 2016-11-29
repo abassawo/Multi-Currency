@@ -4,7 +4,6 @@ package com.abasscodes.myapplication;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -12,11 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.abasscodes.myapplication.model.FixerDictionary;
 import com.abasscodes.myapplication.model.api.Rates;
+
+import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,9 +90,12 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
     }
 
     public void onRatesLoaded(Rates rates) {
+        FixerDictionary dictionary = new FixerDictionary(rates);
+//        Set<String> currencies = PreferenceHelper.getFollowedCurrencies(this);
         adapter.addFragment(CalculatorFragment.newInstance(rates), "Calculate");
         adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void reload(int tabIdx) {
