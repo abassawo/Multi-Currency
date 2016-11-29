@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/activity_vertical_margin">
 
-    <ToggleButton
-        android:layout_margin="80dp"
-        android:id="@+id/select_all_btn"
-        android:textOff="@string/select_all"
-        android:textOn="@string/clear_extras"
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switch_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:textOff="Use Default Currencies"
+        android:textOn="Use all supported Currencies"/>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/picker_rv"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</RelativeLayout>
+</LinearLayout>
 

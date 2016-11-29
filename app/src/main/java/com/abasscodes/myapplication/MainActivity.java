@@ -4,19 +4,19 @@ package com.abasscodes.myapplication;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.model.api.Rates;
+import com.abasscodes.myapplication.view.BaseFragment;
+import com.abasscodes.myapplication.view.CalculatorFragment;
+import com.abasscodes.myapplication.view.RatesListFragment;
+import com.abasscodes.myapplication.view.TabAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
     TabLayout tabs;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.nav_view)
-    NavigationView navView;
+//    @BindView(R.id.nav_view)
+//    NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupActionBar();
-        setupNavBar(navView);
+//        setupNavBar(navView);
         adapter = new TabAdapter(this);
         if (viewPager != null) {
             initViewPager(viewPager);
@@ -73,16 +73,16 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_rates, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void initViewPager(ViewPager viewPager) {
         adapter.addFragment(new RatesListFragment(), "Rates");

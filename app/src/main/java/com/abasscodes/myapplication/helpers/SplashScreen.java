@@ -2,12 +2,10 @@ package com.abasscodes.myapplication.helpers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.abasscodes.myapplication.MainActivity;
-import com.abasscodes.myapplication.PreferenceHelper;
 import com.abasscodes.myapplication.ui.onboard.OnboardActivity;
 
 /**

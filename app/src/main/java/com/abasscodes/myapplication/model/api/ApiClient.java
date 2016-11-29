@@ -27,7 +27,6 @@ public class ApiClient {
     private static ApiClient instance;
     private final String API_BASE_URL = "http://api.fixer.io/";
     private static FixerApi api;
-    static Map<String, Double> map = new HashMap<>();
     private Listener listener;
 
     public static synchronized ApiClient getInstance(Listener listener){
@@ -52,7 +51,6 @@ public class ApiClient {
     }
 
     public void getConversionMap(){
-        final Currencies currencies = new Currencies();
         getLatest(Config.baseCurrency).enqueue(new Callback<RateResponse>() {
             @Override
             public void onResponse(Call<RateResponse> call, Response<RateResponse> response) {

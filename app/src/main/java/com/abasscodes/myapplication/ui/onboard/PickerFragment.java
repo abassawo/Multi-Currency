@@ -4,13 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.ToggleButton;
 
 import com.abasscodes.myapplication.R;
+import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 
 import butterknife.BindView;
@@ -20,11 +24,10 @@ import butterknife.ButterKnife;
  * Created by C4Q on 11/23/16.
  */
 
-public class PickerFragment extends BaseSlideFragment implements View.OnClickListener {
-    @BindView(R.id.picker_rv)
-    RecyclerView recyclerView;
-    @BindView(R.id.select_all_btn)
-    ToggleButton toggleBtn;
+public class PickerFragment extends BaseSlideFragment {
+
+    @BindView(R.id.switch_btn)
+    SwitchCompat switchBtn;
     private OptionsAdapter adapter;
 //    @BindView(R.id.done_btn)
 //    Button doneButton;
@@ -39,36 +42,23 @@ public class PickerFragment extends BaseSlideFragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.picker_fragment, container, false);
+        View view = inflater.inflate(R.layout.picker_fragment, container, false);
         ButterKnife.bind(this, view);
-        setupRV(recyclerView);
+        switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                PreferenceHelper.setShowAllCurrencies(getActivity(), b);
+            }
+        });
         return view;
     }
 
-    public void setupRV(RecyclerView recyclerView){
+
+    public void setupRV(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public boolean canMoveFurther() {
-        return super.canMoveFurther();
-    }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.select_all_btn:
-                boolean selectAll = toggleBtn.isChecked();
-//                adapter.onButtonClicked(selectAll);
-                break;
-//            case R.id.done_btn:
-//                //fixme
-//                for(CurrenciesSupported c : adapter.currencies){
-////                    if(c.is)
-//                }
-//                break;
-        }
-    }
 
 }

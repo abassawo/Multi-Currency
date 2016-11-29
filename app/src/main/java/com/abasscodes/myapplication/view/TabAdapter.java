@@ -1,4 +1,4 @@
-package com.abasscodes.myapplication;
+package com.abasscodes.myapplication.view;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;

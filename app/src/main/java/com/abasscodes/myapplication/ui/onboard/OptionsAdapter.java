@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class OptionsAdapter extends RecyclerView.Adapter<OptionsViewHolder> {
     public CurrenciesSupported[] currencies;
     private OptionsViewHolder holder;
-//    private MultiSelector multiSelector = new MultiSelector();
+
 
     public OptionsAdapter(CurrenciesSupported[] values) {
         this.currencies = values;

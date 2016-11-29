@@ -8,10 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.FloatRange;
 import android.support.annotation.RequiresApi;
 import android.view.View;
-import android.widget.Toast;
 
 import com.abasscodes.myapplication.MainActivity;
-import com.abasscodes.myapplication.PreferenceHelper;
+import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.R;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
@@ -70,7 +69,7 @@ public class OnboardActivity extends MaterialIntroActivity {
                 .buttonsColor(R.color.blueish_grey)
                 .image(agency.tango.materialintroscreen.R.drawable.ic_next)
                 .title("You're all set.")
-                .description("Start using Multi-CUrrency")
+                .description("Start using Multi-Currency")
                 .build(), buttonBehavior);
     }
 

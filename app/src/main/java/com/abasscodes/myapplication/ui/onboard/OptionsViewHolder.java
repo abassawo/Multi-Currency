@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.abasscodes.myapplication.R;
+import com.abasscodes.myapplication.helpers.PermissionMap;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 
 
@@ -32,13 +33,12 @@ public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.O
     @BindView(R.id.currency_opt_textview)
     TextView currencyTV;
 
+    PermissionMap permissionMap = new PermissionMap();
 
     public OptionsViewHolder(ViewGroup parent) {
         super(inflateView(parent));
-//        this.selector = selector;
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(this);
-//        selector.setSelectable(true);
     }
 
 
@@ -71,37 +71,10 @@ public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.currency_opt_checkbox:
-//                selector.setSelected(this, true);
+                String currency = currencyTV.getText().toString();
+                permissionMap.applyPermission(currency, checkBox.isChecked());
         }
     }
 
-//    @Override
-//    public Drawable getSelectionModeBackgroundDrawable() {
-//        return null;
-//    }
-//
-//    @Override
-//    public Drawable getDefaultModeBackgroundDrawable() {
-//        return null;
-//    }
 
-//    @Override
-//    public StateListAnimator getSelectionModeStateListAnimator() {
-//        return null;
-//    }
-//
-//    @Override
-//    public StateListAnimator getDefaultModeStateListAnimator() {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean isSelectable() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isActivated() {
-//        return false;
-//    }
 }

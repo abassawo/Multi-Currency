@@ -12,4 +12,7 @@
     <string name="select_all">Select all</string>
     <string name="clear_extras">Clear</string>
     <string name="error_message">Error</string>
+    <string name="use_default">Use Default Settings</string>
+    <string name="custom">Customize currencies</string>
+    <string name="settings">Settings</string>
 </resources>
