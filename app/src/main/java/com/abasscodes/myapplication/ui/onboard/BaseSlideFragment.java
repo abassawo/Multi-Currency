@@ -22,7 +22,7 @@ public class BaseSlideFragment extends SlideFragment{
 
     @Override
     public boolean canMoveFurther() {
-        return false;
+        return true;
     }
 
     @Override

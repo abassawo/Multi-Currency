@@ -7,11 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,24 +33,12 @@ public class RatesListFragment extends Fragment implements ApiClient.Listener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
         setRetainInstance(true);
         ApiClient.getInstance(this).getConversionMap();
         adapter = new RatesAdapter();
-
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_rates, menu);
-    }
-
-    public static RatesListFragment getInstance() {
-        if (instance == null) {
-            instance = newInstance();
-        }
-        return instance;
-    }
 
     private static RatesListFragment newInstance() {
         Bundle args = new Bundle();
@@ -89,4 +72,5 @@ public class RatesListFragment extends Fragment implements ApiClient.Listener {
         MainActivity activity = (MainActivity) getActivity();
         activity.onRatesLoaded(rates);
     }
+
 }

@@ -2,14 +2,13 @@ package com.abasscodes.myapplication.ui.onboard;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ToggleButton;
-
 
 import com.abasscodes.myapplication.R;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
@@ -22,10 +21,13 @@ import butterknife.ButterKnife;
  */
 
 public class PickerFragment extends BaseSlideFragment implements View.OnClickListener {
-    @BindView(R.id.picker_rv) RecyclerView recyclerView;
+    @BindView(R.id.picker_rv)
+    RecyclerView recyclerView;
     @BindView(R.id.select_all_btn)
     ToggleButton toggleBtn;
     private OptionsAdapter adapter;
+//    @BindView(R.id.done_btn)
+//    Button doneButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,16 +51,24 @@ public class PickerFragment extends BaseSlideFragment implements View.OnClickLis
     }
 
     @Override
+    public boolean canMoveFurther() {
+        return super.canMoveFurther();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.select_all_btn:
                 boolean selectAll = toggleBtn.isChecked();
-                adapter.onButtonClicked(selectAll);
+//                adapter.onButtonClicked(selectAll);
                 break;
+//            case R.id.done_btn:
+//                //fixme
+//                for(CurrenciesSupported c : adapter.currencies){
+////                    if(c.is)
+//                }
+//                break;
         }
     }
 
-    public interface AdapterCallback {
-        void onButtonClicked(boolean selectAll);
-    }
 }

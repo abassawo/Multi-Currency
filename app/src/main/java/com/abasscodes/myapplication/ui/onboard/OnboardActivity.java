@@ -63,15 +63,11 @@ public class OnboardActivity extends MaterialIntroActivity {
         getNextButtonTranslationWrapper().setExitTranslation(translation);
         addSlide(new PickerFragment());
         addLastSlide();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            addPermissionSlide();
-        }
     }
 
     public void addLastSlide() {
-        addSlide(builder.backgroundColor(R.color.colorPrimary)
-                .buttonsColor(R.color.colorAccent)
+        addSlide(builder.backgroundColor(R.color.cardview_dark_background)
+                .buttonsColor(R.color.blueish_grey)
                 .image(agency.tango.materialintroscreen.R.drawable.ic_next)
                 .title("You're all set.")
                 .description("Start using Multi-CUrrency")
@@ -83,8 +79,8 @@ public class OnboardActivity extends MaterialIntroActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void addPermissionSlide() {
         SlideFragment permissionSlide = builder
-                .backgroundColor(R.color.colorPrimary)
-                .buttonsColor(R.color.colorAccent)
+                .backgroundColor(R.color.blueish_grey)
+                .buttonsColor(R.color.cardview_shadow_end_color)
                 .neededPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
                 .image(agency.tango.materialintroscreen.R.drawable.ic_next)
                 .title("Grant Permissions")

@@ -5,15 +5,17 @@ import android.view.ViewGroup;
 
 import com.abasscodes.myapplication.model.Currencies;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
+//import com.bignerdranch.android.multiselector.MultiSelector;
 
 import java.util.Arrays;
 
 /**
  * Created by C4Q on 11/23/16.
  */
-public class OptionsAdapter extends RecyclerView.Adapter<OptionsViewHolder> implements PickerFragment.AdapterCallback {
-    private CurrenciesSupported[] currencies;
+public class OptionsAdapter extends RecyclerView.Adapter<OptionsViewHolder> {
+    public CurrenciesSupported[] currencies;
     private OptionsViewHolder holder;
+//    private MultiSelector multiSelector = new MultiSelector();
 
     public OptionsAdapter(CurrenciesSupported[] values) {
         this.currencies = values;
@@ -36,12 +38,12 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsViewHolder> impl
         return currencies.length;
     }
 
-    @Override
-    public void onButtonClicked(boolean selectAll) {
-        for (CurrenciesSupported c : currencies) {
-            holder.bind(c, selectAll);
-        }
-    }
+//    @Override
+//    public void onButtonClicked(boolean selectAll) {
+//        for (CurrenciesSupported c : currencies) {
+//            holder.bind(c, selectAll);
+//        }
+//    }
 
 
 

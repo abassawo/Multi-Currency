@@ -13,6 +13,7 @@ import android.widget.ToggleButton;
 import com.abasscodes.myapplication.R;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -25,19 +26,19 @@ import static com.abasscodes.myapplication.model.api.CurrenciesSupported.JPY;
  * Created by C4Q on 11/23/16.
  */
 public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    //    private MultiSelector selector;
     @BindView(R.id.currency_opt_checkbox)
     CheckBox checkBox;
     @BindView(R.id.currency_opt_textview)
     TextView currencyTV;
 
 
-
-
     public OptionsViewHolder(ViewGroup parent) {
         super(inflateView(parent));
+//        this.selector = selector;
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(this);
-
+//        selector.setSelectable(true);
     }
 
 
@@ -48,7 +49,7 @@ public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public void bind(CurrenciesSupported currency, boolean checked) {
         currencyTV.setText(currency.name());
-        switch (currency){
+        switch (currency) {
             case EUR:
             case JPY:
             case BRL:
@@ -56,7 +57,8 @@ public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.O
                 checkBox.setChecked(true);
                 checkBox.setClickable(false);
                 break;
-            default: checkBox.setChecked(checked);
+            default:
+                checkBox.setChecked(checked);
         }
 
     }
@@ -67,8 +69,39 @@ public class OptionsViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.currency_opt_checkbox:
+//                selector.setSelected(this, true);
+        }
     }
 
+//    @Override
+//    public Drawable getSelectionModeBackgroundDrawable() {
+//        return null;
+//    }
+//
+//    @Override
+//    public Drawable getDefaultModeBackgroundDrawable() {
+//        return null;
+//    }
 
+//    @Override
+//    public StateListAnimator getSelectionModeStateListAnimator() {
+//        return null;
+//    }
+//
+//    @Override
+//    public StateListAnimator getDefaultModeStateListAnimator() {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean isSelectable() {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean isActivated() {
+//        return false;
+//    }
 }
