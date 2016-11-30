@@ -10,6 +10,8 @@ import com.abasscodes.myapplication.R;
 import com.abasscodes.myapplication.model.Currency;
 
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -26,14 +28,13 @@ public class RVViewHolder extends RecyclerView.ViewHolder {
     public RVViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, itemView);
-//        currencyNameField = (TextView) itemView.findViewById(R.id.currency_name);
-//        currencyValueField = (TextView) itemView.findViewById(R.id.currency_value);
     }
 
 
 
     public void bind(String country, double rate) {
+        DecimalFormat df = new DecimalFormat("####0.00");
         currencyNameField.setText(country);
-        currencyValueField.setText(String.valueOf(rate));
+        currencyValueField.setText(df.format(rate));
     }
 }

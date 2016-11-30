@@ -7,10 +7,10 @@
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin" />
 
 
     <LinearLayout
@@ -22,26 +22,25 @@
 
         <EditText
             android:id="@+id/base_currency_edittext"
-            android:hint="@string/edittext_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/edittext_hint"
             android:inputType="numberDecimal" />
-
 
 
         <Button
             android:id="@+id/convert_btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/convert"/>
+            android:text="@string/convert" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/result_textview"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="center"
-        android:layout_height="wrap_content"
-        android:textSize="32dp"/>
+        android:textSize="32dp" />
 
 </LinearLayout>
