@@ -13,11 +13,8 @@ public class RateCalculator {
 
     private RateDictionary dictionary;
 
-    public RateCalculator(Rates rates){
-        this(new RateDictionary(rates));
-    }
 
-    private RateCalculator(RateDictionary dictionary) {
+    public RateCalculator(RateDictionary dictionary) {
         this.dictionary = dictionary;
     }
 

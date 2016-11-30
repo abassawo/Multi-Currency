@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 
+import com.abasscodes.myapplication.model.api.CurrenciesSupported;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,9 +24,6 @@ public class PreferenceHelper {
     public static String getBaseCurrency() {
         return "USD";
     }
-
-    private static String[] defaultCurrArray = new String[]{"JPY", "EUR", "BRL", "GBP"};
-    private static Set<String> defaultCurrencies;
 
     public static boolean isFirstRun(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(onboard_key, true);
@@ -48,5 +47,21 @@ public class PreferenceHelper {
     public static void toggleShowAll(Context context) {
         boolean showAll = showAllCurrenciesOrNot(context);
         setShowAllCurrencies(context, !showAll);
+    }
+
+    public static CurrenciesSupported[] getCurrenciesForPermission(Context context){
+        if(showAllCurrenciesOrNot(context)){
+            return getAllCurrenciesSupported(context);
+        }else{
+            return getDefaultCurrencies();
+        }
+    }
+
+    private static CurrenciesSupported[] getAllCurrenciesSupported(Context context){
+            return CurrenciesSupported.values();
+    }
+
+    public static CurrenciesSupported[] getDefaultCurrencies(){
+        return new CurrenciesSupported[]{CurrenciesSupported.JPY, CurrenciesSupported.EUR, CurrenciesSupported.GBP, CurrenciesSupported.BRL};
     }
 }

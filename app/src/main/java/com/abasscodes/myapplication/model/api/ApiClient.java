@@ -5,6 +5,7 @@ import android.util.Log;
 import com.abasscodes.myapplication.Config;
 import com.abasscodes.myapplication.model.Currencies;
 import com.abasscodes.myapplication.model.Currency;
+import com.abasscodes.myapplication.model.RateDictionary;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -57,7 +58,8 @@ public class ApiClient {
                 Log.d(TAG, response.body().toString());
                 RateResponse resp = response.body();
                 Rates rates = resp.getRates();
-                listener.onConversionComplete(rates);
+                RateDictionary.getInstance().setRates(rates);
+                listener.onConversionComplete(RateDictionary.getInstance());
             }
 
             @Override
@@ -74,6 +76,6 @@ public class ApiClient {
     }
 
     public interface Listener{
-        void onConversionComplete(Rates rates);
+        void onConversionComplete(RateDictionary dictionary);
     }
 }

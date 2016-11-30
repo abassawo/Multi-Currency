@@ -15,4 +15,6 @@
     <string name="use_default">Use Default Settings</string>
     <string name="custom">Customize currencies</string>
     <string name="settings">Settings</string>
+    <string name="show_all_currencies">Show all currencies</string>
+    <string name="show_default_currencies">Show default currencies</string>
 </resources>

@@ -1,5 +1,8 @@
 package com.abasscodes.myapplication.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.abasscodes.myapplication.model.api.Rates;
 
 import java.util.HashMap;
@@ -9,15 +12,44 @@ import java.util.Map;
  * Created by C4Q on 11/29/16.
  */
 
-public class RateDictionary {
+public class RateDictionary implements Parcelable {
     public String baseCurrency;
     public Map<String, Double> map = new HashMap<>();
+    private static RateDictionary instance;
 
-    public RateDictionary(Rates rates){
-        this("USD", rates);
+    public RateDictionary(){}
+
+
+    protected RateDictionary(Parcel in) {
+        baseCurrency = in.readString();
+        map = in.readHashMap(Map.class.getClassLoader());
     }
 
-    private RateDictionary(String baseCurr, Rates rates) {
+    public static final Creator<RateDictionary> CREATOR = new Creator<RateDictionary>() {
+        @Override
+        public RateDictionary createFromParcel(Parcel in) {
+            return new RateDictionary(in);
+        }
+
+        @Override
+        public RateDictionary[] newArray(int size) {
+            return new RateDictionary[size];
+        }
+    };
+
+    public static RateDictionary getInstance() {
+        if (instance == null) {
+            instance = new RateDictionary();
+        }
+        return instance;
+    }
+
+
+    public void setRates(Rates rates) {
+        setRates("USD", rates);
+    }
+
+    private void setRates(String baseCurr, Rates rates) {
         this.baseCurrency = baseCurr;
         map.put("AUD", rates.getAUD());
         map.put("BGN", rates.getBGN());
@@ -60,15 +92,27 @@ public class RateDictionary {
         return map.get("EUR");
     }
 
-    public double getJPY(){
+    public double getJPY() {
         return map.get("JPY");
     }
 
-    public double getBRL(){
+    public double getBRL() {
         return map.get("BRL");
     }
 
     public double get(String curr) {
         return map.get(curr);
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(baseCurrency);
+        parcel.writeMap(map);
     }
 }

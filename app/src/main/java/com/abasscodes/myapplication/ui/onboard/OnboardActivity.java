@@ -60,7 +60,6 @@ public class OnboardActivity extends MaterialIntroActivity {
     public void initSlides() {
         enableLastSlideAlphaExitTransition(true);
         getNextButtonTranslationWrapper().setExitTranslation(translation);
-        addSlide(new PickerFragment());
         addLastSlide();
     }
 

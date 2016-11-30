@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.abasscodes.myapplication.helpers.PreferenceHelper;
+import com.abasscodes.myapplication.model.RateDictionary;
+import com.abasscodes.myapplication.model.api.ApiClient;
 import com.abasscodes.myapplication.model.api.Rates;
 import com.abasscodes.myapplication.view.BaseFragment;
 import com.abasscodes.myapplication.view.CalculatorFragment;
@@ -22,15 +24,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends AppCompatActivity implements BaseFragment.FragmentCallback{
+public class MainActivity extends AppCompatActivity {
 
     private TabAdapter adapter;
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-//    @BindView(R.id.nav_view)
-//    NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupActionBar();
-//        setupNavBar(navView);
         adapter = new TabAdapter(this);
         if (viewPager != null) {
             initViewPager(viewPager);
@@ -73,30 +72,13 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.Frag
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        return super.onOptionsItemSelected(item);
-//    }
 
     public void initViewPager(ViewPager viewPager) {
         adapter.addFragment(new RatesListFragment(), "Rates");
+        adapter.addFragment(new CalculatorFragment(), "Calculate");
         viewPager.setAdapter(adapter);
     }
 
-    public void onRatesLoaded(Rates rates) {
-        adapter.addFragment(CalculatorFragment.newInstance(rates), "Calculate");
-        adapter.notifyDataSetChanged();
-    }
 
-    @Override
-    public void reload(int tabIdx) {
-        BaseFragment fragment = (BaseFragment) adapter.getItem(tabIdx);
-        fragment.reload();
-    }
+
 }

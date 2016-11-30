@@ -2,6 +2,7 @@ package com.abasscodes.myapplication.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,27 +25,27 @@ import butterknife.ButterKnife;
  * Created by C4Q on 11/18/16.
  */
 
-public class RatesListFragment extends BaseFragment implements ApiClient.Listener {
+public class RatesListFragment extends BaseFragment{
     private static final String TAG = RatesListFragment.class.getSimpleName();
     @BindView(R.id.recycler_view)
     RecyclerView rv;
     private RatesAdapter adapter;
 
     private static RatesListFragment instance;
+    private RateDictionary dict;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ApiClient.getInstance(this).getConversionMap();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApiClient.getInstance(this).getConversionMap();
-        adapter = new RatesAdapter();
-    }
+        adapter = new RatesAdapter(getActivity());
 
-
-    private static RatesListFragment newInstance() {
-        Bundle args = new Bundle();
-        RatesListFragment fragment = new RatesListFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 
 
@@ -59,24 +60,17 @@ public class RatesListFragment extends BaseFragment implements ApiClient.Listene
     }
 
     public void setupRV(RateDictionary dict) {
-        boolean showAll = PreferenceHelper.showAllCurrenciesOrNot(getActivity());
-        adapter.setData(dict, showAll);
+        adapter.setData(dict);
         Log.d(TAG, "adapter " + adapter.getItemCount());
         adapter.notifyDataSetChanged();
-        rv.setAdapter(adapter);
     }
 
 
     @Override
-    public void onConversionComplete(Rates rates) {
-        RateDictionary dict = new RateDictionary(rates);
-        setupRV(dict);
-        MainActivity activity = (MainActivity) getActivity();
-        activity.onRatesLoaded(rates);
+    public void onConversionComplete(RateDictionary dict) {
+        if(dict != null) {
+            setupRV(dict);
+        }
     }
 
-    @Override
-    public void reload() {
-
-    }
 }

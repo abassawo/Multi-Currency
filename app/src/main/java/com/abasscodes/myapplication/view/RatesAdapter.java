@@ -1,5 +1,7 @@
 package com.abasscodes.myapplication.view;
 
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.abasscodes.myapplication.R;
 import com.abasscodes.myapplication.helpers.PermissionMap;
+import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.model.RateDictionary;
 
 import java.util.ArrayList;
@@ -17,18 +20,30 @@ import java.util.List;
  */
 public class RatesAdapter extends RecyclerView.Adapter<RVViewHolder> {
 
+    private Context context;
     private List<Double> rateList; //gbp, eur, jpy, brl;
     private List<String> currenciesList = new ArrayList<>();
     private RateDictionary dict;
 
 
-    public RatesAdapter() {
+    public RatesAdapter(Context context) {
+        this.context = context;
         rateList = new ArrayList<>();
         currenciesList = new ArrayList<>();
     }
 
+    public RatesAdapter(Context context, RateDictionary dictionary) {
+        this(context);
+        setData(dictionary);
+    }
 
-    public void setData(RateDictionary dict, boolean showAll) {
+    public void setData(RateDictionary dictionary){
+        setData(dictionary, PreferenceHelper.showAllCurrenciesOrNot(context));
+    }
+
+    private void setData(RateDictionary dict, boolean showAll) {
+        rateList = new ArrayList<>();
+        currenciesList = new ArrayList<>();
         this.dict = dict;
         int idx = 0;
         if (showAll) {
@@ -42,7 +57,6 @@ public class RatesAdapter extends RecyclerView.Adapter<RVViewHolder> {
                 }
             }
         }
-
 
     }
 
