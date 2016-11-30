@@ -1,4 +1,4 @@
-package com.abasscodes.myapplication.ui.onboard;
+package com.abasscodes.myapplication.onboard;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -29,7 +29,6 @@ public class OnboardActivity extends MaterialIntroActivity {
     private IViewTranslation translation;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +45,6 @@ public class OnboardActivity extends MaterialIntroActivity {
                 showMessage(getResources().getString(R.string.app_description));
             }
         }, getResources().getString(R.string.app_name));
-        addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.colorPrimary)
-                        .buttonsColor(R.color.colorAccent)
-                        .image(agency.tango.materialintroscreen.R.drawable.ic_next)
-                        .title("Let's get started!")
-                        .description(getResources().getString(R.string.fixer_credit))
-                        .build(), buttonBehavior);
         initSlides();
 
     }
@@ -60,6 +52,19 @@ public class OnboardActivity extends MaterialIntroActivity {
     public void initSlides() {
         enableLastSlideAlphaExitTransition(true);
         getNextButtonTranslationWrapper().setExitTranslation(translation);
+        addSlide(new SlideFragmentBuilder()
+                .backgroundColor(R.color.colorPrimary)
+                .buttonsColor(R.color.colorAccent)
+                .image(agency.tango.materialintroscreen.R.drawable.ic_next)
+                .title("Let's get started!")
+                .description(getResources().getString(R.string.fixer_credit))
+                .build(), buttonBehavior);
+        addSlide(new SlideFragmentBuilder()
+                .image(agency.tango.materialintroscreen.R.drawable.ic_next)
+                .backgroundColor(R.color.colorPrimary)
+                .buttonsColor(R.color.colorAccent)
+                .title("View exchange rates or Convert currencies")
+                .build(), buttonBehavior);
         addLastSlide();
     }
 
@@ -70,23 +75,6 @@ public class OnboardActivity extends MaterialIntroActivity {
                 .title("You're all set.")
                 .description("Start using Multi-Currency")
                 .build(), buttonBehavior);
-    }
-
-
-    @TargetApi(Build.VERSION_CODES.M)
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void addPermissionSlide() {
-        SlideFragment permissionSlide = builder
-                .backgroundColor(R.color.blueish_grey)
-                .buttonsColor(R.color.cardview_shadow_end_color)
-                .neededPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-                .image(agency.tango.materialintroscreen.R.drawable.ic_next)
-                .title("Grant Permissions")
-                .description("Get Started")
-                .build();
-        boolean hasPermissions = permissionSlide.hasNeededPermissionsToGrant();
-        permissionSlide.setAllowEnterTransitionOverlap(hasPermissions);
-        addSlide(permissionSlide, buttonBehavior);
     }
 
 

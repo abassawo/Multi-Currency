@@ -4,11 +4,6 @@
 
 
 
-    <item android:id="@+id/reload"
-        android:icon="@drawable/autorenew"
-        android:title="@string/reload"
-        app:showAsAction="always"/>
-
     <item android:id="@+id/settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/settings"

@@ -1,10 +1,10 @@
-package com.abasscodes.myapplication.view;
+package com.abasscodes.myapplication.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,8 +20,8 @@ import com.abasscodes.myapplication.model.RateCalculator;
 import com.abasscodes.myapplication.helpers.TextUtil;
 import com.abasscodes.myapplication.model.RateDictionary;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
-import com.abasscodes.myapplication.model.api.Rates;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import butterknife.BindView;
@@ -44,21 +44,12 @@ public class CalculatorFragment extends BaseFragment implements View.OnClickList
     CurrenciesSupported targetCurrency;
     private ArrayAdapter<CurrenciesSupported> adapter;
     private CurrenciesSupported[] currencies;
-    private static String DICT_KEY = "dictionary";
-
-    public static CalculatorFragment newInstance(RateDictionary dictionary) {
-        CalculatorFragment fragment = new CalculatorFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(DICT_KEY, dictionary);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reload();
+        initializeSpinnerAdapter();
     }
 
     public void initCalculator(RateDictionary dictionary) {
@@ -84,12 +75,19 @@ public class CalculatorFragment extends BaseFragment implements View.OnClickList
     }
 
     public void updateAnswer(double result) {
-        resultField.setText(String.valueOf(result));
+        DecimalFormat df = new DecimalFormat("####0.00");
+        resultField.setText(df.format(result) + " " + targetCurrency);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        currencies = PreferenceHelper.getCurrenciesForPermission(getActivity());
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, currencies);
+        if(spinner != null) {
+            spinner.setAdapter(adapter);
+        }
+
     }
 
     @Nullable
@@ -105,11 +103,14 @@ public class CalculatorFragment extends BaseFragment implements View.OnClickList
     }
 
 
-    public void reload() {
+    public void initializeSpinnerAdapter() {
         RateDictionary dict = RateDictionary.getInstance();
         currencies = PreferenceHelper.getCurrenciesForPermission(getActivity());
         initCalculator(dict);
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, currencies);
+        if(spinner != null) {
+            spinner.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -128,6 +129,19 @@ public class CalculatorFragment extends BaseFragment implements View.OnClickList
         }
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.settings:
+                onResume();
+                break;
+        }
+        return true;
+    }
+
+
 
     private void showEditTextError() {
         Snackbar.make(getView(), "Add the base currency amount you'd like to convert ", Snackbar.LENGTH_INDEFINITE).show();

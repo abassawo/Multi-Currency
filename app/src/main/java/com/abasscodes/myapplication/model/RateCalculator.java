@@ -5,6 +5,8 @@ import com.abasscodes.myapplication.model.RateDictionary;
 import com.abasscodes.myapplication.model.api.CurrenciesSupported;
 import com.abasscodes.myapplication.model.api.Rates;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by C4Q on 11/22/16.
  */
@@ -15,6 +17,7 @@ public class RateCalculator {
 
 
     public RateCalculator(RateDictionary dictionary) {
+
         this.dictionary = dictionary;
     }
 

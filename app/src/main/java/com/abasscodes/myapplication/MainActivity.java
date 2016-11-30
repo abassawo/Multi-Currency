@@ -2,22 +2,16 @@ package com.abasscodes.myapplication;
 
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.abasscodes.myapplication.helpers.PreferenceHelper;
-import com.abasscodes.myapplication.model.RateDictionary;
-import com.abasscodes.myapplication.model.api.ApiClient;
-import com.abasscodes.myapplication.model.api.Rates;
-import com.abasscodes.myapplication.view.BaseFragment;
-import com.abasscodes.myapplication.view.CalculatorFragment;
-import com.abasscodes.myapplication.view.RatesListFragment;
+import com.abasscodes.myapplication.view.fragments.CalculatorFragment;
+import com.abasscodes.myapplication.view.fragments.RatesListFragment;
 import com.abasscodes.myapplication.view.TabAdapter;
 
 import butterknife.BindView;
@@ -48,18 +42,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setupNavBar(NavigationView nav) {
-        nav.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
-    }
-
     public void setupActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         ab.setSubtitle("Base Currency " + PreferenceHelper.getBaseCurrency());
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setHomeAsUpIndicator(R.drawable.autorenew);
     }
 
 

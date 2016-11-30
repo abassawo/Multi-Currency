@@ -1,4 +1,4 @@
-package com.abasscodes.myapplication.view;
+package com.abasscodes.myapplication.view.fragments;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -32,14 +32,7 @@ public abstract class BaseFragment extends Fragment implements ApiClient.Listene
     @Override
     public void onResume() {
         super.onResume();
-//        reload();
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_main, menu);
+        ApiClient.getInstance(this).getConversionMap();
     }
 
     public int getMessagingStringRes() {
@@ -52,11 +45,15 @@ public abstract class BaseFragment extends Fragment implements ApiClient.Listene
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.reload:
-//                reload();
-                break;
             case R.id.settings:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle(R.string.settings)
@@ -77,4 +74,6 @@ public abstract class BaseFragment extends Fragment implements ApiClient.Listene
         }
         return true;
     }
+
+
 }

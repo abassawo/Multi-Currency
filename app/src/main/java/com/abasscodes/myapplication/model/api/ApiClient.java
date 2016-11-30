@@ -2,16 +2,10 @@ package com.abasscodes.myapplication.model.api;
 
 import android.util.Log;
 
-import com.abasscodes.myapplication.Config;
-import com.abasscodes.myapplication.model.Currencies;
-import com.abasscodes.myapplication.model.Currency;
+import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.model.RateDictionary;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +22,9 @@ public class ApiClient {
     private static ApiClient instance;
     private final String API_BASE_URL = "http://api.fixer.io/";
     private static FixerApi api;
+    private final String baseCurrency;
     private Listener listener;
+
 
     public static synchronized ApiClient getInstance(Listener listener){
         if(instance == null){
@@ -39,6 +35,7 @@ public class ApiClient {
 
     private ApiClient(Listener listener) {
         this.listener = listener;
+        baseCurrency = PreferenceHelper.getBaseCurrency();
         if (api == null) {
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -52,7 +49,7 @@ public class ApiClient {
     }
 
     public void getConversionMap(){
-        getLatest(Config.baseCurrency).enqueue(new Callback<RateResponse>() {
+        getLatest(baseCurrency).enqueue(new Callback<RateResponse>() {
             @Override
             public void onResponse(Call<RateResponse> call, Response<RateResponse> response) {
                 Log.d(TAG, response.body().toString());

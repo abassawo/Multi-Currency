@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.abasscodes.myapplication.MainActivity;
-import com.abasscodes.myapplication.ui.onboard.OnboardActivity;
+import com.abasscodes.myapplication.onboard.OnboardActivity;
 
 /**
  * Created by C4Q on 11/23/16.

@@ -21,6 +21,7 @@ public class PreferenceHelper {
 
     private static String onboard_key = "onboard?";
     private static String show_all_currs = "showAll?";
+
     public static String getBaseCurrency() {
         return "USD";
     }

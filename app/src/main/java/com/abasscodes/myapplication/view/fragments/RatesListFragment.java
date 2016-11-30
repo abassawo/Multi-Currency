@@ -1,21 +1,19 @@
-package com.abasscodes.myapplication.view;
+package com.abasscodes.myapplication.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.abasscodes.myapplication.MainActivity;
 import com.abasscodes.myapplication.R;
-import com.abasscodes.myapplication.helpers.PreferenceHelper;
 import com.abasscodes.myapplication.model.RateDictionary;
 import com.abasscodes.myapplication.model.api.ApiClient;
-import com.abasscodes.myapplication.model.api.Rates;
+import com.abasscodes.myapplication.view.RatesAdapter;
 
 
 import butterknife.BindView;
@@ -54,7 +52,11 @@ public class RatesListFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_currency_list, container, false);
         ButterKnife.bind(this, view);
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager glm = new GridLayoutManager(getActivity(), 2);
+        rv.setLayoutManager(glm);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rv.getContext(),
+               glm.getOrientation());
+        rv.addItemDecoration(dividerItemDecoration);
         rv.setAdapter(adapter);
         return view;
     }
